@@ -21,6 +21,9 @@ namespace GameZone.Services
 		public IEnumerable<Game> GetAll()
 		{
 			return _context.Games
+				.Include(g => g.Category)
+				.Include(g => g.Devices)
+				.ThenInclude(d => d.Device)
 				.AsNoTracking()
 				.ToList();
 		}
